@@ -1,0 +1,29 @@
+{% extends "learning_logs/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block page_header %}
+  <h1>Usuwanie Tematu</h1>
+{% endblock page_header %}
+
+{% block content %}
+  <h4>Czy jesteś pewien, że chcesz usunąć '{{ topicname }}'?</h4>
+
+
+  <form method="post" action="" class="form">
+    {% csrf_token %}
+    {% buttons %}
+      <button name="submit" class="btn btn-danger btn-lg">Usuń</button>
+
+      <a class="btn btn-lg btn-secondary btn-lg" 
+          href="{% url 'learning_logs:topics' %}" 
+          role="button">Anuluj</a>
+    {% endbuttons %}
+  </form>
+
+
+{% endblock content %}
+
+
+
+

@@ -1,0 +1,50 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>{{ topic }}</h1>
+    </div>
+    <div class="col">
+      <a class="btn btn-lg btn-primary float-right" 
+        href="{% url 'learning_logs:new_entry' topic.id %}" 
+        role="button">Dodaj nowy wpis</a>
+    </div>
+  </div>
+</div>  
+{% endblock page_header %}
+
+{% block content %}
+  {% for entry in entries %}
+    <div class="card mb-3">
+      <div class="card-header">
+        <h4 class="float-left">
+          {{ entry.owner }}
+        </h4>
+        <h4 class="float-right">
+          {{ entry.date_added|date:'M d, Y H:i' }}
+        </h4>
+      </div>
+      <div class="card-body">
+        {{ entry.text|linebreaks }}
+        
+        {% if entry.owner == request.user%}
+          <a class="btn btn-lg btn-primary" 
+            href="{% url 'learning_logs:edit_entry' entry.id %}" 
+            role="button">Edytuj wpis</a>
+        {% endif %}
+
+      </div>
+    </div>
+    {% empty %}
+    <h4>Nie ma jeszcze wpisów dla tego tematu.</h4>
+  {% endfor %}
+
+  {% if topic.owner == request.user%}
+    <a class="btn btn-lg btn-danger float-left" 
+      href="{% url 'learning_logs:delete_topic' topic.id %}" 
+      role="button">Usuń temat</a> 
+  {% endif %}
+
+{% endblock content %}

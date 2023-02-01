@@ -1,0 +1,35 @@
+{% extends "learning_logs/base.html" %}
+
+{% block page_header %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Tematy</h1>
+      </div>
+      <div class="col">
+        <a class="btn btn-lg btn-primary float-right" 
+          href="{% url 'learning_logs:new_topic' %}" 
+          role="button">Dodaj nowy temat</a>
+      </div>
+    </div>
+  </div>  
+{% endblock page_header %}
+
+{% block content %}
+  <ul class="list-group">
+    {% for topic in topics %}
+      <li class="list-group-item d-flex justify-content-between align-items-center border-0">
+        <h4 class="float-left">
+          <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a>
+          <span class="badge badge-primary badge-pill">{{ topic.cnt }}</span>
+        </h4>
+        <h4 class="float-right">
+          {{ topic.owner__username }}
+        </h4>
+      </li>
+    {% empty %}
+      <li><h4>Nie ma jeszcze żadnych jesiotrów.</h4></li>
+    {% endfor %}
+  </ul>
+   
+{% endblock content %}

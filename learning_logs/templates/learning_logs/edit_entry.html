@@ -1,0 +1,25 @@
+{% extends "learning_logs/base.html" %}
+
+{% load bootstrap4 %} 
+
+{% block page_header %}
+  <h2>Edytuj wpis</h2>
+{% endblock page_header %}
+
+{% block content %}
+  <h3><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></h3>
+
+  <form class="form" action="{% url 'learning_logs:edit_entry' entry.id %}" method='post'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button name="submit" class="btn btn-primary btn-lg">Jesiotr</button>
+      <a class="btn btn-lg btn-secondary btn-lg" 
+        href="{% url 'learning_logs:topic' topic.id %}" 
+        role="button">Anuluj</a>
+      <a class="btn btn-lg btn-danger float-right" 
+        href="{% url 'learning_logs:delete_entry' entry.id %}" 
+        role="button">Usuń</a>
+    {% endbuttons %}
+  </form>
+{% endblock content %}

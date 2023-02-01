@@ -1,0 +1,22 @@
+{% extends "learning_logs/base.html" %}
+
+{% block page_header %}
+  <div class="jumbotron">
+    <h1 class="display-3">Monitoruj postępy w nauce.</h1>
+  
+    <p class="lead">Załóż konto, aby rozpocząć korzystanie z aplikacji Learing 
+      Log oraz wyświetlić listę poznawanych tematów. Gdy nauczysz się czegoś 
+      nowego na dany tamat, utwórz wpis podumowujący to, czego się nauczyłeś
+      i podziel się zdobytą wiedzą z innymi.
+      W wersji 2.0 publiczne wpisy oraz jesiotry.
+    </p>
+    {% if user.is_authenticated %}
+      <p>Jesteś zarejestrowany</p>
+    {% else %}
+      <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" 
+        role="button">Register &raquo;</a>
+      <a class="btn btn-lg btn-primary" href="{% url 'users:login' %}" 
+        role="button">Login &raquo;</a>
+    {% endif %}
+  </div>
+{% endblock page_header %}
